@@ -1,0 +1,9 @@
+<launch>
+  <!-- Example launch file for the ROS->DDS bridge node -->
+  <arg name="robot_id" default="robot_1" />
+  <env name="ROBOT_ID" value="$(arg robot_id)" />
+
+  <node pkg="ros_dds_bridge" type="RosDdsBridge" name="ros_dds_bridge" output="screen">
+    <!-- node parameters can be added here -->
+  </node>
+</launch>

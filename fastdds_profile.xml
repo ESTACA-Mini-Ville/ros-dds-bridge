@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sample Fast-DDS profile enabling simple participant discovery and optional unicast metatraffic.
+     Customize the <metatrafficUnicastLocatorList> entries to the IP addresses of the hosts
+     on your LAN that will run other participants (e.g., subscriber or publisher hosts).
+
+     Two recommended approaches:
+     - If multicast works on your LAN, you can omit metatraffic unicast and rely on multicast discovery.
+     - If multicast is blocked, list the other container hosts (or host IPs) in <metatrafficUnicastLocatorList>.
+-->
+<profiles xmlns="http://www.eprosima.com/fastdds/2.0">
+  <participant profile_name="LANParticipantProfile">
+    <rtps>
+      <name>LANParticipant</name>
+      <!-- Use Simple Endpoint Discovery Protocol for small setups -->
+      <builtin>
+        <use_SIMPLE_RTPSParticipantDiscoveryProtocol>true</use_SIMPLE_RTPSParticipantDiscoveryProtocol>
+        <use_SIMPLE_RTPSParticipantANNOUNCER>false</use_SIMPLE_RTPSParticipantANNOUNCER>
+        <use_SIMPLE_RTPSParticipantDETECTOR>false</use_SIMPLE_RTPSParticipantDETECTOR>
+        <!-- Example: force unicast metatraffic to specific IPs/ports when multicast is not available -->
+        <metatrafficUnicastLocatorList>
+          <!-- Replace or add your host IPs here: -->
+          <!-- <locator>
+            <udpv4>
+              <address>192.168.1.10</address>
+              <port>7400</port>
+            </udpv4>
+          </locator>
+          <locator>
+            <udpv4>
+              <address>192.168.1.11</address>
+              <port>7400</port>
+            </udpv4>
+          </locator> -->
+        </metatrafficUnicastLocatorList>
+      </builtin>
+
+      <!-- Optional: specify default send/recv ports if needed -->
+      <!-- <port>
+        <portBase>7400</portBase>
+      </port> -->
+    </rtps>
+  </participant>
+</profiles>

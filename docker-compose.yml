@@ -1,0 +1,13 @@
+services:
+  ros-robot-1:
+    image: ros_dds_bridge
+    build: .
+    environment:
+      - FASTRTPS_DEFAULT_PROFILES_FILE=/root/fastdds_profile.xml
+      - ROBOT_ID=robot_1
+    volumes:
+      - ./fastdds_profile.xml:/root/fastdds_profile.xml:ro
+      - ./entrypoints/replay_rosbag_entrypoint.sh:/usr/local/bin/replay_rosbag_entrypoint.sh:ro
+      - ./rosbags:/rosbags:ro
+    # Replace the .bag file path with your own
+    entrypoint: ["/bin/bash", "/usr/local/bin/replay_rosbag_entrypoint.sh", "/rosbags/2025-05-05-01-29-04.bag"]
