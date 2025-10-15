@@ -44,7 +44,7 @@ RUN if [ -f /Fast-DDS/install/setup.bash ]; then . /Fast-DDS/install/setup.bash;
     if [ -f /opt/ros/melodic/setup.bash ]; then . /opt/ros/melodic/setup.bash; fi && \
     mkdir -p /catkin_ws && \
     cd /catkin_ws/src/ros_dds_bridge && \
-    mv -R ./types ./src && \
+    mv ./types ./src && \
     cd ./src && \
     if [ -f /Fast-DDS/src/fastddsgen/scripts/fastddsgen ]; then /Fast-DDS/src/fastddsgen/scripts/fastddsgen /catkin_ws/src/ros_dds_bridge/src/types/geometry_msgs/PoseWithCovarianceStamped.idl || true; else echo "fastddsgen not found; skipping IDL generation"; fi && \
     cd /catkin_ws && \
