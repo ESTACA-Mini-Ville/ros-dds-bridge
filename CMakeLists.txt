@@ -30,6 +30,21 @@ file(GLOB_RECURSE DDS_MESSAGE_SOURCES_CXX CONFIGURE_DEPENDS "src/*.cxx")
 
 message(STATUS "Found generated IDL sources: ${USER_IDL_GENERATED_SOURCES}")
 
+# Automatically collect all .cpp and .cxx sources under src/, but keep the
+# entrypoint `src/RosDdsBridge.cpp` explicit so the user doesn't need to
+# register every single implementation file manually.
+file(GLOB_RECURSE ALL_CPP_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cxx")
+
+# Remove the entrypoint from the auto-collected list (so it's specified only once).
+set(SOURCES "")
+foreach(_src IN LISTS ALL_CPP_SOURCES)
+  if(NOT _src STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/src/RosDdsBridge.cpp")
+    list(APPEND SOURCES "${_src}")
+  endif()
+endforeach()
+
+message(STATUS "Auto-collected source files count: ${SOURCES}")
+
 # Declare the catkin package
 catkin_package(
   CATKIN_DEPENDS roscpp std_msgs geometry_msgs
@@ -43,7 +58,7 @@ include_directories(
 
 # Bridge executable that composes translators
 #add_executable(RosDdsBridge src/RosDdsBridge.cpp src/ros_to_dds/RosToDdsPoseBridge.cpp src/BridgeManager.cpp ${DDS_MESSAGE_SOURCES_CXX})
-add_executable(RosDdsBridge src/RosDdsBridge.cpp ${DDS_MESSAGE_SOURCES_CXX})
+add_executable(RosDdsBridge src/RosDdsBridge.cpp ${SOURCES} ${DDS_MESSAGE_SOURCES_CXX})
 target_include_directories(RosDdsBridge PRIVATE src)
 target_link_libraries(RosDdsBridge fastdds fastcdr ${catkin_LIBRARIES})
 
