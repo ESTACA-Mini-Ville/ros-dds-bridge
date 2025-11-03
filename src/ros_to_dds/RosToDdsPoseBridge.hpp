@@ -14,7 +14,7 @@
 #include <fastdds/dds/topic/Topic.hpp>
 #include <fastdds/dds/topic/TypeSupport.hpp>
 
-#include "../types/geometry_msgs/PoseWithCovarianceStampedPubSubTypes.hpp"
+#include "../types/typesPubSubTypes.hpp"
 
 using namespace eprosima::fastdds::dds;
 

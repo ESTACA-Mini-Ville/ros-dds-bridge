@@ -46,7 +46,7 @@ RUN if [ -f /Fast-DDS/install/setup.bash ]; then . /Fast-DDS/install/setup.bash;
     cd /catkin_ws/src/ros_dds_bridge && \
     mv ./types ./src && \
     cd ./src && \
-    if [ -f /Fast-DDS/src/fastddsgen/scripts/fastddsgen ]; then /Fast-DDS/src/fastddsgen/scripts/fastddsgen /catkin_ws/src/ros_dds_bridge/src/types/geometry_msgs/PoseWithCovarianceStamped.idl || true; else echo "fastddsgen not found; skipping IDL generation"; fi && \
+    if [ -f /Fast-DDS/src/fastddsgen/scripts/fastddsgen ]; then /Fast-DDS/src/fastddsgen/scripts/fastddsgen /catkin_ws/src/ros_dds_bridge/src/types/types.idl || true; else echo "fastddsgen not found; skipping IDL generation"; fi && \
     cd /catkin_ws && \
     catkin build -DCMAKE_POLICY_VERSION_MINIMUM=3.10
 

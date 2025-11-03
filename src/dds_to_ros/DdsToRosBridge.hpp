@@ -1,6 +1,7 @@
 #pragma once
 
 // Base interface for bridges that convert DDS -> ROS
+#include <string>
 namespace eprosima {
 namespace fastdds {
 namespace dds {
