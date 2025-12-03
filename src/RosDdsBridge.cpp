@@ -2,6 +2,7 @@
 #include "BridgeManager.hpp"
 #include "ros_to_dds/RosToDdsPoseBridge.hpp"
 #include "dds_to_ros/DdsToRosVelBridge.hpp"
+#include "dds_to_ros/DdsToRosDestinationBridge.hpp"
 
 int main(int argc, char** argv)
 {
@@ -16,6 +17,10 @@ int main(int argc, char** argv)
     // register DDS->ROS velocity bridge (cmd_vel)
     auto vel_bridge = std::make_shared<dds_to_ros::DdsToRosVelBridge>(nh);
     mgr.register_dds_to_ros_bridge(vel_bridge);
+
+    // register DDS->ROS destination bridge (destination)
+    auto destination_bridge = std::make_shared<dds_to_ros::DdsToRosDestinationBridge>(nh);
+    mgr.register_dds_to_ros_bridge(destination_bridge);
 
     if (!mgr.init_all())
     {
